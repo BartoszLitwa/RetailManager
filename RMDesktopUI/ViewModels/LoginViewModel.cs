@@ -38,23 +38,33 @@ namespace RMDesktopUI.ViewModels
             }
         }
 
-        public bool CanLogIn
+        public bool IsErrorVisible => ErrorMessage?.Length > 0;
+
+        private string _errorMessage;
+
+        public string ErrorMessage
         {
-            get
+            get => _errorMessage; 
+            set
             {
-                return UserName?.Length > 0 && Password?.Length > 0;
+                _errorMessage = value;
+                NotifyOfPropertyChange(() => ErrorMessage);
+                NotifyOfPropertyChange(() => IsErrorVisible);
             }
         }
+
+        public bool CanLogIn => UserName?.Length > 0 && Password?.Length > 0;
 
         public async Task LogIn()
         {
             try
             {
+                ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(UserName, Password);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                ErrorMessage = ex.Message;
             }
         }
     }
