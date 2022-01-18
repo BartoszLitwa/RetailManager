@@ -32,7 +32,8 @@ namespace RMDesktopUI
             // Adding all the Singletons - almost like static classes  
             _container 
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<IAPIHelper, APIHelper>();
 
             // Reflection - get all assemblies in program
             // Adding all the ViewModels Automatically
