@@ -1,11 +1,11 @@
 ﻿using Caliburn.Micro;
+using RMDesktopUI.Helpers;
 using RMDesktopUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace RMDesktopUI
 {
@@ -16,6 +16,11 @@ namespace RMDesktopUI
         public BootStrapper()
         {
             Initialize();
+
+            ConventionManager.AddElementConvention<PasswordBox>(
+                PasswordBoxHelper.BoundPasswordProperty,
+                "Password",
+                "PasswordChanged");
         }
 
         // Dependency Injection Setup
@@ -24,11 +29,13 @@ namespace RMDesktopUI
             // Instantiate _contianer
             _container.Instance(_container);
 
+            // Adding all the Singletons - almost like static classes  
             _container 
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>();
 
             // Reflection - get all assemblies in program
+            // Adding all the ViewModels Automatically
             GetType().Assembly.GetTypes()
                 // Only classes
                 .Where(type => type.IsClass)
