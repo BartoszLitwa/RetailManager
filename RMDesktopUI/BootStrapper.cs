@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
 using RMDesktopUI.Helpers;
+using RMDesktopUI.Library.Api;
+using RMDesktopUI.Library.Models;
 using RMDesktopUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,12 +13,14 @@ namespace RMDesktopUI
 {
     class BootStrapper : BootstrapperBase
     {
+        // DI container
         private SimpleContainer _container = new SimpleContainer();
 
         public BootStrapper()
         {
             Initialize();
 
+            // Fix for passwordBox - Caliburn.micro
             ConventionManager.AddElementConvention<PasswordBox>(
                 PasswordBoxHelper.BoundPasswordProperty,
                 "Password",
@@ -33,7 +37,8 @@ namespace RMDesktopUI
             _container 
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
-                .Singleton<IAPIHelper, APIHelper>();
+                .Singleton<IAPIHelper, APIHelper>()
+                .Singleton<ILoggedInUserModel, LoggedInUserModel>();
 
             // Reflection - get all assemblies in program
             // Adding all the ViewModels Automatically

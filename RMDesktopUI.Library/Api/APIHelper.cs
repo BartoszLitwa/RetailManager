@@ -1,21 +1,21 @@
-﻿using RMDesktopUI.Models;
+﻿using RMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace RMDesktopUI.Helpers
+namespace RMDesktopUI.Library.Api
 {
     public class APIHelper : IAPIHelper
     {
-        public HttpClient apiClient;
+        private HttpClient apiClient;
+        private ILoggedInUserModel _loggedUser;
 
-        public APIHelper()
+        public APIHelper(ILoggedInUserModel loggedUser)
         {
+            _loggedUser = loggedUser;
             InitializeClient();
         }
 
@@ -24,8 +24,10 @@ namespace RMDesktopUI.Helpers
             apiClient = new HttpClient();
             // Get uri from app.config
             apiClient.BaseAddress = new Uri(ConfigurationManager.AppSettings["api"]);
-            // clear all headers
+            // Remove all possibly previosly added header before adding new
+            apiClient.DefaultRequestHeaders.Clear();
             apiClient.DefaultRequestHeaders.Accept.Clear();
+
             apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
@@ -43,6 +45,32 @@ namespace RMDesktopUI.Helpers
                 if (response.IsSuccessStatusCode)
                 {
                     return await response.Content.ReadAsAsync<AuthenticatedUser>();
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+        public async Task<LoggedInUserModel> GetLoggedInUserInfo(string token)
+        {
+            // Remove all possibly previosly added header before adding new
+            apiClient.DefaultRequestHeaders.Clear();
+            apiClient.DefaultRequestHeaders.Accept.Clear();
+
+            apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            apiClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+
+            using(HttpResponseMessage response = await apiClient.GetAsync("api/User"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<LoggedInUserModel>();
+                    _loggedUser.LogInUserModel(result);
+                    _loggedUser.Token = token;
+
+                    return result;
                 }
                 else
                 {
