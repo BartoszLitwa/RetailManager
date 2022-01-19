@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RMDataManager.Library
+namespace RMDataManager.Library.DataAccess
 {
     public class UserData
     {

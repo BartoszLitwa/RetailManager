@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using RMDesktopUI.Helpers;
 using RMDesktopUI.Library.Api;
+using RMDesktopUI.Library.Api.Interface;
 using RMDesktopUI.Library.Models;
 using RMDesktopUI.ViewModels;
 using System;
@@ -31,7 +32,8 @@ namespace RMDesktopUI
         protected override void Configure()
         {
             // Instantiate _contianer
-            _container.Instance(_container);
+            _container.Instance(_container)
+                .PerRequest<IProductEndpoint, ProductEndpoint>();
 
             // Adding all the Singletons - almost like static classes  
             _container 

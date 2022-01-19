@@ -1,4 +1,5 @@
-﻿using RMDesktopUI.Library.Models;
+﻿using RMDesktopUI.Library.Api.Interface;
+using RMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,7 +11,7 @@ namespace RMDesktopUI.Library.Api
 {
     public class APIHelper : IAPIHelper
     {
-        private HttpClient apiClient;
+        private HttpClient _apiClient;
         private ILoggedInUserModel _loggedUser;
 
         public APIHelper(ILoggedInUserModel loggedUser)
@@ -19,16 +20,18 @@ namespace RMDesktopUI.Library.Api
             InitializeClient();
         }
 
+        public HttpClient ApiClient => _apiClient;
+
         private void InitializeClient()
         {
-            apiClient = new HttpClient();
+            _apiClient = new HttpClient();
             // Get uri from app.config
-            apiClient.BaseAddress = new Uri(ConfigurationManager.AppSettings["api"]);
+            _apiClient.BaseAddress = new Uri(ConfigurationManager.AppSettings["api"]);
             // Remove all possibly previosly added header before adding new
-            apiClient.DefaultRequestHeaders.Clear();
-            apiClient.DefaultRequestHeaders.Accept.Clear();
+            _apiClient.DefaultRequestHeaders.Clear();
+            _apiClient.DefaultRequestHeaders.Accept.Clear();
 
-            apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task<AuthenticatedUser> Authenticate(string username, string password)
@@ -40,7 +43,7 @@ namespace RMDesktopUI.Library.Api
                 new KeyValuePair<string, string>("password", password)
             });
 
-            using (HttpResponseMessage response = await apiClient.PostAsync("/Token", data))
+            using (HttpResponseMessage response = await _apiClient.PostAsync("/Token", data))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -55,14 +58,9 @@ namespace RMDesktopUI.Library.Api
 
         public async Task<LoggedInUserModel> GetLoggedInUserInfo(string token)
         {
-            // Remove all possibly previosly added header before adding new
-            apiClient.DefaultRequestHeaders.Clear();
-            apiClient.DefaultRequestHeaders.Accept.Clear();
+            AddBearerToken(token);
 
-            apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            apiClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-
-            using(HttpResponseMessage response = await apiClient.GetAsync("api/User"))
+            using (HttpResponseMessage response = await _apiClient.GetAsync("api/User"))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -77,6 +75,16 @@ namespace RMDesktopUI.Library.Api
                     throw new Exception(response.ReasonPhrase);
                 }
             }
+        }
+
+        public void AddBearerToken(string token)
+        {
+            // Remove all possibly previosly added header before adding new
+            _apiClient.DefaultRequestHeaders.Clear();
+            _apiClient.DefaultRequestHeaders.Accept.Clear();
+
+            _apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _apiClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
         }
     }
 }

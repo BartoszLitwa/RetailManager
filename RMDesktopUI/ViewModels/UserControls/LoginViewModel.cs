@@ -1,6 +1,6 @@
 ﻿using Caliburn.Micro;
 using RMDesktopUI.EventModels;
-using RMDesktopUI.Library.Api;
+using RMDesktopUI.Library.Api.Interface;
 using System;
 using System.Threading.Tasks;
 
@@ -17,6 +17,10 @@ namespace RMDesktopUI.ViewModels.UserControls
         {
             _apiHelper = apiHelper;
             _events = events;
+
+            // Placeholder for easier logging in
+            _userName = "test@test.com";
+            _password = "Pwd12345.";
         }
 
         public string UserName

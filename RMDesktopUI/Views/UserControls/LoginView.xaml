@@ -42,15 +42,15 @@
         </TextBlock>
 
         <TextBox x:Name="UserName" Grid.Row="2" Grid.Column="2"
-                 MinWidth="300" Margin="10 0 0 10"/>
+                 MinWidth="300" Margin="10 0 0 10" />
 
         <!-- Username row -->
-        <TextBlock Grid.Row="3" Grid.Column="1" Margin="0 0 10 10">
+        <TextBlock Grid.Row="3" Grid.Column="1" Margin="0 0 10 10" >
             Password:
         </TextBlock>
 
         <PasswordBox x:Name="Password" Grid.Row="3" Grid.Column="2"
-                 MinWidth="300" Margin="10 0 0 10"/>
+                 MinWidth="300" Margin="10 0 0 10" />
 
         <!-- Login Button -->
         <Button Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
