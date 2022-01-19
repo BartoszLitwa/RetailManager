@@ -102,23 +102,19 @@ namespace RMDesktopUI.ViewModels.UserControls
 
         private double CalculateSubTotal()
         {
-            double subTotal = 0;
-
-            subTotal = Cart
+            double? subTotal = Cart?
                 .Sum(x => x.Product.RetailPrice * x.QuantityInCart);
 
-            return subTotal;
+            return subTotal ?? 0;
         }
 
         private double CalculateTax()
         {
-            double taxAmount = 0;
-
-            taxAmount = Cart
+            double? taxAmount = Cart?
                 .Where(x => x.Product.TaxId != 0)
                 .Sum(x => x.Product.RetailPrice * x.QuantityInCart * (taxRate / 100));
 
-            return taxAmount;
+            return taxAmount ?? 0;
         }
 
         public string Tax => CalculateTax().ToString("C");
