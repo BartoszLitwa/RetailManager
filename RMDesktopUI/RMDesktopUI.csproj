@@ -82,9 +82,10 @@
     </ApplicationDefinition>
     <Compile Include="BootStrapper.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\LoginViewModel.cs" />
+    <Compile Include="ViewModels\UserControl\SalesViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="Views\LoginView.xaml.cs">
+    <Compile Include="Views\UserControl\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
@@ -94,11 +95,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\LoginView.xaml">
+    <Compile Include="Views\UserControl\SalesView.xaml.cs">
+      <DependentUpon>SalesView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\UserControl\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControl\SalesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -132,6 +140,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="ViewModels\Window\" />
+    <Folder Include="Views\Window\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RMDesktopUI.Library\RMDesktopUI.Library.csproj">

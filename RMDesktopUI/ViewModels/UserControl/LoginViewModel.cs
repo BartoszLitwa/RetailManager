@@ -3,7 +3,7 @@ using RMDesktopUI.Library.Api;
 using System;
 using System.Threading.Tasks;
 
-namespace RMDesktopUI.ViewModels
+namespace RMDesktopUI.ViewModels.UserControl
 {
     public class LoginViewModel : Screen
     {
@@ -44,7 +44,7 @@ namespace RMDesktopUI.ViewModels
 
         public string ErrorMessage
         {
-            get => _errorMessage; 
+            get => _errorMessage;
             set
             {
                 _errorMessage = value;

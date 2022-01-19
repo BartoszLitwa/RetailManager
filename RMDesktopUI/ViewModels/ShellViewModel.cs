@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using RMDesktopUI.ViewModels.UserControl;
 
 namespace RMDesktopUI.ViewModels
 {
