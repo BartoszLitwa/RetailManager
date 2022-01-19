@@ -8,13 +8,11 @@ namespace RMDesktopUI.ViewModels
 {
     public class ShellViewModel : Conductor<object>, IHandle<LogOnEvent>
     {
-        private SimpleContainer _container;
         private IEventAggregator _events;
         private SalesViewModel _salesVM;
 
-        public ShellViewModel(SimpleContainer container, LoginViewModel loginVM, IEventAggregator events, SalesViewModel salesVM)
+        public ShellViewModel(LoginViewModel loginVM, IEventAggregator events, SalesViewModel salesVM)
         {
-            _container = container;
             _events = events;
             _salesVM = salesVM;
 
@@ -22,7 +20,7 @@ namespace RMDesktopUI.ViewModels
             _events.SubscribeOnUIThread(this);
 
             // Override current viewModel - new Instance
-            ActivateItemAsync(_container.GetInstance<LoginViewModel>());
+            ActivateItemAsync(IoC.Get<LoginViewModel>());
         }
 
         // LogOnEvent

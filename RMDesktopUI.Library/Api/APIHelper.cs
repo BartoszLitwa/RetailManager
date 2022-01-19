@@ -77,7 +77,7 @@ namespace RMDesktopUI.Library.Api
             }
         }
 
-        public void AddBearerToken(string token)
+        private void AddBearerToken(string token)
         {
             // Remove all possibly previosly added header before adding new
             _apiClient.DefaultRequestHeaders.Clear();

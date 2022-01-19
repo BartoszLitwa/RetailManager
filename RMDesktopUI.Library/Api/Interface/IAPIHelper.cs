@@ -10,7 +10,5 @@ namespace RMDesktopUI.Library.Api.Interface
 
         Task<AuthenticatedUser> Authenticate(string username, string password);
         Task<LoggedInUserModel> GetLoggedInUserInfo(string token);
-
-        void AddBearerToken(string token);
     }
 }
