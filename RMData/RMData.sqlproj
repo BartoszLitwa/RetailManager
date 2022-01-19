@@ -63,6 +63,7 @@
     <Folder Include="PublishLocations" />
     <Folder Include="dbo\Stored Procedures\User" />
     <Folder Include="dbo\Stored Procedures\Product" />
+    <Folder Include="dbo\Stored Procedures\Sale" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishLocations\RMData.publish.xml" />
@@ -75,5 +76,6 @@
     <Build Include="dbo\Tables\Inventory.sql" />
     <Build Include="dbo\Stored Procedures\User\spUserLookup.sql" />
     <Build Include="dbo\Stored Procedures\Product\spProduct_GetAll.sql" />
+    <Build Include="dbo\Tables\Tax.sql" />
   </ItemGroup>
 </Project>

@@ -16,17 +16,14 @@ namespace RMDesktopUI.Library.Models
         public int QuantityInCart
         {
             get => _quantityInCart;
-            set 
-            { 
+            set
+            {
                 _quantityInCart = value;
                 NotifyOfPropertyChange(() => QuantityInCart);
                 NotifyOfPropertyChange(() => DisplayText);
             }
         }
 
-        public string DisplayText
-        {
-            get => $"{QuantityInCart} - {Product.ProductName}";
-        }
+        public string DisplayText => $"{QuantityInCart} - {Product.ProductName}";
     }
 }

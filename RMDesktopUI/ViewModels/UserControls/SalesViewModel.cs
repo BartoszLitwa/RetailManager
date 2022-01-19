@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using RMDesktopUI.Library.Api.Interface;
+using RMDesktopUI.Library.Helpers;
 using RMDesktopUI.Library.Models;
 using System.ComponentModel;
 using System.Linq;
@@ -10,12 +11,13 @@ namespace RMDesktopUI.ViewModels.UserControls
     public class SalesViewModel : Screen
     {
         IProductEndpoint _productEndpoint;
+        private IConfigHelper _configHelper;
+        private double taxRate;
 
-        public SalesViewModel(IProductEndpoint productEndpoint)
+        public SalesViewModel(IProductEndpoint productEndpoint, IConfigHelper configHelper)
         {
             _productEndpoint = productEndpoint;
-
-
+            _configHelper = configHelper;
         }
 
         protected override async void OnViewLoaded(object view)
@@ -30,6 +32,8 @@ namespace RMDesktopUI.ViewModels.UserControls
             Products = new BindingList<ProductModel>(productList);
 
             Cart = new BindingList<CartItemModel>();
+
+            taxRate = _configHelper.GetTaxRate();
         }
 
         #region BindingList
@@ -90,26 +94,44 @@ namespace RMDesktopUI.ViewModels.UserControls
         {
             get
             {
-                decimal subTotal = 0;
+                NotifyOfPropertyChange(() => Tax);
+                NotifyOfPropertyChange(() => Total);
+                return CalculateSubTotal().ToString("C");
+            }
+        }
 
-                for (int i = 0; i < Cart?.Count; i++)
+        private double CalculateSubTotal()
+        {
+            double subTotal = 0;
+
+            for (int i = 0; i < Cart?.Count; i++)
+            {
+                subTotal += Cart[i].Product.RetailPrice * Cart[i].QuantityInCart;
+            }
+
+            return subTotal;
+        }
+
+        private double CalculateTax()
+        {
+            double taxAmount = 0;
+
+            for (int i = 0; i < Cart?.Count; i++)
+            {
+                if (Cart[i].Product.TaxId == 0)
                 {
-                    subTotal += Cart[i].Product.RetailPrice * Cart[i].QuantityInCart;
+                    continue;
                 }
 
-                return subTotal.ToString("C");
+                taxAmount += Cart[i].Product.RetailPrice * Cart[i].QuantityInCart * (taxRate / 100);
             }
+
+            return taxAmount;
         }
 
-        public string Tax
-        {
-            get
-            {
-                return "";
-            }
-        }
+        public string Tax => CalculateTax().ToString("C");
 
-        public string Total => "";
+        public string Total => (CalculateSubTotal() + CalculateTax()).ToString("C");
         #endregion
 
         #region Buttons
