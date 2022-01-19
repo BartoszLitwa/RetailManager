@@ -81,11 +81,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BootStrapper.cs" />
+    <Compile Include="EventModels\LogOnEvent.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
-    <Compile Include="ViewModels\UserControl\LoginViewModel.cs" />
-    <Compile Include="ViewModels\UserControl\SalesViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\LoginViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\SalesViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="Views\UserControl\LoginView.xaml.cs">
+    <Compile Include="Views\UserControls\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
@@ -95,10 +96,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\UserControl\SalesView.xaml.cs">
+    <Compile Include="Views\UserControls\SalesView.xaml.cs">
       <DependentUpon>SalesView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\UserControl\LoginView.xaml">
+    <Page Include="Views\UserControls\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -106,7 +107,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControl\SalesView.xaml">
+    <Page Include="Views\UserControls\SalesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

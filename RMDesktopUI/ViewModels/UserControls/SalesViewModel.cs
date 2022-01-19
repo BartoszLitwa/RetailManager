@@ -1,12 +1,7 @@
 ﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RMDesktopUI.ViewModels.UserControl
+namespace RMDesktopUI.ViewModels.UserControls
 {
     public class SalesViewModel : Screen
     {
@@ -33,18 +28,18 @@ namespace RMDesktopUI.ViewModels.UserControl
                 _cart = value;
                 NotifyOfPropertyChange(() => Cart);
             }
-        } 
+        }
         #endregion
 
-        private string _itemQuantity;
+        private int _itemQuantity;
 
-        public string ItemQuantity
+        public int ItemQuantity
         {
             get => _itemQuantity;
             set
             {
                 _itemQuantity = value;
-                NotifyOfPropertyChange(() => Products);
+                NotifyOfPropertyChange(() => ItemQuantity);
             }
         }
 

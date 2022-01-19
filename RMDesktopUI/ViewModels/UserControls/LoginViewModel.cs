@@ -1,19 +1,22 @@
 ﻿using Caliburn.Micro;
+using RMDesktopUI.EventModels;
 using RMDesktopUI.Library.Api;
 using System;
 using System.Threading.Tasks;
 
-namespace RMDesktopUI.ViewModels.UserControl
+namespace RMDesktopUI.ViewModels.UserControls
 {
     public class LoginViewModel : Screen
     {
         private string _userName;
         private string _password;
         private IAPIHelper _apiHelper;
+        private IEventAggregator _events;
 
-        public LoginViewModel(IAPIHelper apiHelper)
+        public LoginViewModel(IAPIHelper apiHelper, IEventAggregator events)
         {
             _apiHelper = apiHelper;
+            _events = events;
         }
 
         public string UserName
@@ -59,11 +62,14 @@ namespace RMDesktopUI.ViewModels.UserControl
         {
             try
             {
+                // Clear the Error message
                 ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(UserName, Password);
 
                 // Capture more information about the user
                 await _apiHelper.GetLoggedInUserInfo(result.Access_token);
+
+                await _events.PublishOnUIThreadAsync(new LogOnEvent());
             }
             catch (Exception ex)
             {
