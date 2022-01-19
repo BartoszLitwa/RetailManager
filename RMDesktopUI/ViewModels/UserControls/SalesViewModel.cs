@@ -104,10 +104,8 @@ namespace RMDesktopUI.ViewModels.UserControls
         {
             double subTotal = 0;
 
-            for (int i = 0; i < Cart?.Count; i++)
-            {
-                subTotal += Cart[i].Product.RetailPrice * Cart[i].QuantityInCart;
-            }
+            subTotal = Cart
+                .Sum(x => x.Product.RetailPrice * x.QuantityInCart);
 
             return subTotal;
         }
@@ -116,15 +114,9 @@ namespace RMDesktopUI.ViewModels.UserControls
         {
             double taxAmount = 0;
 
-            for (int i = 0; i < Cart?.Count; i++)
-            {
-                if (Cart[i].Product.TaxId == 0)
-                {
-                    continue;
-                }
-
-                taxAmount += Cart[i].Product.RetailPrice * Cart[i].QuantityInCart * (taxRate / 100);
-            }
+            taxAmount = Cart
+                .Where(x => x.Product.TaxId != 0)
+                .Sum(x => x.Product.RetailPrice * x.QuantityInCart * (taxRate / 100));
 
             return taxAmount;
         }
