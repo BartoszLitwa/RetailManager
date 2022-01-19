@@ -21,7 +21,8 @@ namespace RMDataManager.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            // Default connection String to Database
+            : base("EFData", throwIfV1Schema: false)
         {
         }
         
