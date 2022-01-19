@@ -8,4 +8,5 @@
     [CreateDate] DATETIME2 NOT NULL DEFAULT getutcdate(),
     [LastModified] DATETIME2 NOT NULL DEFAULT getutcdate(), 
     [TaxId] int NOT NULL DEFAULT 1, 
+    CONSTRAINT [FK_Product_ToTaxRate] FOREIGN KEY (TaxId) REFERENCES TaxRate(Id), 
 )

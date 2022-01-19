@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Tax]
+﻿CREATE TABLE [dbo].[TaxRate]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
 	[TaxPercentage] DECIMAL(5, 2) NOT NULL,
