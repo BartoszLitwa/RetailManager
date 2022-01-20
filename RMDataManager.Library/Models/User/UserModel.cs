@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RMDataManager.Library
+namespace RMDataManager.Library.Models.Sale
 {
     public class UserModel
     {

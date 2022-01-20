@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RMDesktopUI.Library.Models
+namespace RMDataManager.Library.Models.Sale
 {
     public class ProductModel
     {
