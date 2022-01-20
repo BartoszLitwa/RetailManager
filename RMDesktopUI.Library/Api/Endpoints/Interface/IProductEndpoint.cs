@@ -1,8 +1,8 @@
-﻿using RMDesktopUI.Library.Models;
+﻿using RMDesktopUI.Library.Models.Product;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace RMDesktopUI.Library.Api.Interface
+namespace RMDesktopUI.Library.Api.Endpoints.Interface
 {
     public interface IProductEndpoint
     {

@@ -1,10 +1,7 @@
 ﻿using RMDataManager.Library.DataAccess;
-using RMDataManager.Library.Models;
-using System;
+using RMDataManager.Library.Models.Sale;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 
 namespace RMDataManager.Controllers

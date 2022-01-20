@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using RMDesktopUI.Library.Api.Interface;
+using RMDesktopUI.Library.Api.Endpoints.Interface;
 using RMDesktopUI.Library.Helpers;
 using RMDesktopUI.Library.Models;
 using System.ComponentModel;
@@ -11,12 +11,14 @@ namespace RMDesktopUI.ViewModels.UserControls
     public class SalesViewModel : Screen
     {
         IProductEndpoint _productEndpoint;
+        private readonly ISaleEndpoint _saleEndpoint;
         private IConfigHelper _configHelper;
         private double taxRate;
 
-        public SalesViewModel(IProductEndpoint productEndpoint, IConfigHelper configHelper)
+        public SalesViewModel(IProductEndpoint productEndpoint, ISaleEndpoint saleEndpoint, IConfigHelper configHelper)
         {
             _productEndpoint = productEndpoint;
+            _saleEndpoint = saleEndpoint;
             _configHelper = configHelper;
         }
 
@@ -146,6 +148,7 @@ namespace RMDesktopUI.ViewModels.UserControls
             ItemQuantity = 1;
 
             NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => CanCheckOut);
         }
 
         public bool CanRemoveFromoCart
@@ -161,21 +164,28 @@ namespace RMDesktopUI.ViewModels.UserControls
         public void RemoveFromoCart()
         {
             NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Tax);
+            NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckOut);
         }
 
-        public bool CanCheckOut
+        public bool CanCheckOut => Cart?.Count > 0;
+
+        public async Task CheckOut()
         {
-            get
+            // Create a SaleModel and post it to the API
+            SaleModel saleModel = new SaleModel();
+
+            for (int i = 0; i < Cart.Count; i++)
             {
-                // Make sure something is in cart
-
-                return true;
+                saleModel.SaleDetails.Add(new SaleDetailModel
+                {
+                    Id = Cart[i].Product.Id,
+                    QuantityInrCart = Cart[i].QuantityInCart,
+                });
             }
-        }
 
-        public void CheckOut()
-        {
-
+            await _saleEndpoint.PostSale(saleModel);
         } 
         #endregion
     }

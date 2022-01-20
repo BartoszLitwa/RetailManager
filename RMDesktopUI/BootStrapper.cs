@@ -1,6 +1,8 @@
 ﻿using Caliburn.Micro;
 using RMDesktopUI.Helpers;
 using RMDesktopUI.Library.Api;
+using RMDesktopUI.Library.Api.Endpoints;
+using RMDesktopUI.Library.Api.Endpoints.Interface;
 using RMDesktopUI.Library.Api.Interface;
 using RMDesktopUI.Library.Helpers;
 using RMDesktopUI.Library.Models;
@@ -34,6 +36,7 @@ namespace RMDesktopUI
         {
             // Instantiate _contianer
             _container.Instance(_container)
+                .PerRequest<ISaleEndpoint, SaleEndpoint>()
                 .PerRequest<IProductEndpoint, ProductEndpoint>();
 
             // Adding all the Singletons - almost like static classes  

@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RMDesktopUI.Library.Helpers
+namespace RMDataManager.Library
 {
-    public class ConfigHelper : IConfigHelper
+    public class ConfigHelper
     {
         // TODO: Move this from config to the API
-        public double GetTaxRate()
+        public static double GetTaxRate()
         {
             string rateText = ConfigurationManager.AppSettings["TaxRate"];
 

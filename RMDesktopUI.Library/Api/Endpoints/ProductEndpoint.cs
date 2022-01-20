@@ -1,11 +1,12 @@
-﻿using RMDesktopUI.Library.Api.Interface;
-using RMDesktopUI.Library.Models;
+﻿using RMDesktopUI.Library.Api.Endpoints.Interface;
+using RMDesktopUI.Library.Api.Interface;
+using RMDesktopUI.Library.Models.Product;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace RMDesktopUI.Library.Api
+namespace RMDesktopUI.Library.Api.Endpoints
 {
     public class ProductEndpoint : IProductEndpoint
     {

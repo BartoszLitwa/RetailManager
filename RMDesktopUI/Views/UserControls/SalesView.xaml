@@ -39,11 +39,11 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{Binding ProductName}" />
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                            <StackPanel>
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Price: " FontSize="14"/>
                                 <TextBlock Text="{Binding RetailPrice, StringFormat='{}{0:C}'}" FontSize="14"/>
                             </StackPanel>
-                            <StackPanel Margin="5 0 0 0">
+                            <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
                                 <TextBlock Text="Qty: " FontSize="14"/>
                                 <TextBlock Text="{Binding QuantityInStock}" FontSize="14"/>
                             </StackPanel>

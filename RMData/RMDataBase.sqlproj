@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>RMData</Name>
+    <Name>RMDataBase</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{00e3c7a0-6272-4a0d-98b6-ba2eca340b11}</ProjectGuid>
@@ -77,6 +77,8 @@
     <Build Include="dbo\Stored Procedures\User\spUserLookup.sql" />
     <Build Include="dbo\Stored Procedures\Product\spProduct_GetAll.sql" />
     <Build Include="dbo\Tables\TaxRate.sql" />
+    <Build Include="dbo\Tables\Software.sql" />
+    <Build Include="dbo\Stored Procedures\Product\spProduct_GetById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="RMData.refactorlog" />

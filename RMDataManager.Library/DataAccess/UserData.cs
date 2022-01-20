@@ -1,8 +1,6 @@
 ﻿using RMDataManager.Library.Internal.DataAccess;
-using System;
+using RMDataManager.Library.Models.Sale;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RMDataManager.Library.DataAccess

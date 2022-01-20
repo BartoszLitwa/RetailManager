@@ -1,4 +1,4 @@
-﻿using RMDesktopUI.Library.Models;
+﻿using RMDesktopUI.Library.Models.User;
 using System.Net.Http;
 using System.Threading.Tasks;
 

@@ -1,5 +1,5 @@
 ﻿using RMDesktopUI.Library.Api.Interface;
-using RMDesktopUI.Library.Models;
+using RMDesktopUI.Library.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

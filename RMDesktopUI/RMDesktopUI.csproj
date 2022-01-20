@@ -145,9 +145,9 @@
     <Folder Include="Views\Window\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RMDesktopUI.Library\RMDesktopUI.Library.csproj">
+    <ProjectReference Include="..\RMDesktopUI.Library\RMDesktopUI.Core.csproj">
       <Project>{B250A5DE-0DC7-46EE-874A-F834EEFE4824}</Project>
-      <Name>RMDesktopUI.Library</Name>
+      <Name>RMDesktopUI.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

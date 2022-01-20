@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
-using RMDataManager.Library;
 using RMDataManager.Library.DataAccess;
+using RMDataManager.Library.Models.Sale;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
