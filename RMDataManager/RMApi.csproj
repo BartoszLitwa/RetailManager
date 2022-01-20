@@ -220,6 +220,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -325,9 +326,9 @@
     <Content Include="Scripts\jquery-3.6.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RMDataManager.Library\RMDataManager.Library.csproj">
+    <ProjectReference Include="..\RMDataManager.Library\RMApi.Core.csproj">
       <Project>{82FD9950-71B0-451B-9F46-2BB0FBC1DB06}</Project>
-      <Name>RMDataManager.Library</Name>
+      <Name>RMApi.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
